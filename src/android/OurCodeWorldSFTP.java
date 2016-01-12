@@ -34,7 +34,7 @@ public class OurCodeWorldSFTP extends CordovaPlugin {
 		 
 				ChannelSftp sftp = (ChannelSftp) channel;
 				sftp.cd(directory);
-				Vector files = sftp.ls("*");
+				java.util.Vector files = sftp.ls("*");
 				//System.out.printf("Found %d files in dir %s%n", files.size(), directory);
 		 
 				for (ChannelSftp.LsEntry file : files) {
