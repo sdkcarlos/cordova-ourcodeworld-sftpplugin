@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <plugin xmlns="http://www.phonegap.com/ns/plugins/1.0"
-        id="com.phonegap.plugins.ourcodeworldsftp"
+        id="com.ourcodeworld.sftpplugin"
         version="0.7.0">
 
   <name>Our Code World SFTP Plugin</name>
@@ -23,7 +23,7 @@
       </feature>
     </config-file>
 
-    <source-file src="src/android/com/phonegap/plugins/ourcodeworldsftp/OurCodeWorldSFTP.java" target-dir="src/com/phonegap/plugins/ourcodeworldsftp"/>
+    <source-file src="src/android/OurCodeWorldSFTP.java" target-dir="src/com/ourcodeworld/plugin/"/>
 	<source-file src="src/android/libs/jsch-0.1.53.jar" target-dir="libs" />
   </platform>
 </plugin>
