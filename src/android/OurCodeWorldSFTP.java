@@ -54,10 +54,15 @@ public class OurCodeWorldSFTP extends CordovaPlugin {
 				}
 				*/
 				java.util.Vector filelist = sftp.ls(directory); 
-				
+				String cadena = "";
 				for(int i=0; i<filelist.size();i++){ 
-					callbackContext.success(filelist.get(i).toString());
+					cadena += filelist.get(i).getfilename().toString() + ",";
+					//callbackContext.success(filelist.get(i).toString());
 				} 
+ 
+				callbackContext.success(cadena);
+		 
+		 
 		 
 				channel.disconnect();
 				session.disconnect();
