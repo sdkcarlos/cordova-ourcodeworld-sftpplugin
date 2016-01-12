@@ -13,7 +13,7 @@ public class OurCodeWorldSFTP extends CordovaPlugin {
 
         if (action.equals("connect")) {
 			// We declare final variables  because we are passing an external variable.
-			final long duration = args.getLong(0);
+			JSONObject arg_object = data.getJSONObject(0);
 			final String hostname = arg_object.getString("host");
 			final String login =  arg_object.getString("username");
 			final String password =  arg_object.getString("password");
@@ -22,9 +22,6 @@ public class OurCodeWorldSFTP extends CordovaPlugin {
 			cordova.getThreadPool().execute(new Runnable() {
 				public void run() {
 					try {
-						JSONObject arg_object = data.getJSONObject(0);
-						
-						
 				 
 						java.util.Properties config = new java.util.Properties();
 						config.put("StrictHostKeyChecking", "no");
