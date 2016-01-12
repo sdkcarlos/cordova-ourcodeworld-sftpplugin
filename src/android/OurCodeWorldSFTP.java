@@ -12,79 +12,81 @@ public class OurCodeWorldSFTP extends CordovaPlugin {
     public boolean execute(String action, JSONArray data, CallbackContext callbackContext) throws JSONException {
 
         if (action.equals("connect")) {
-			 
-			try {
-				JSONObject arg_object = data.getJSONObject(0);
-				
-				String hostname = arg_object.getString("host");
-				String login =  arg_object.getString("username");
-				String password =  arg_object.getString("password");
-				String directory =  arg_object.getString("path");
-		 
-				java.util.Properties config = new java.util.Properties();
-				config.put("StrictHostKeyChecking", "no");
-		 
-				JSch ssh = new JSch();
-				Session session = ssh.getSession(login, hostname, 22);
-				session.setConfig(config);
-				session.setPassword(password);
-				session.connect();
-				Channel channel = session.openChannel("sftp");
-				channel.connect();
-		 
-				ChannelSftp sftp = (ChannelSftp) channel;
-				sftp.cd(directory);
-			 
-				@SuppressWarnings("unchecked")
-				
-				java.util.Vector filelist = sftp.ls(directory);
-				for(int i=0; i<filelist.size();i++){
-					callbackContext.success(filelist.get(i).toString());
-					try{
-						callbackContext.success(filelist.get(i).getfilename());
-					}catch(JSchException e){
+			
+			cordova.getThreadPool().execute(new Runnable() {
+				public void run() {
+					try {
+						JSONObject arg_object = data.getJSONObject(0);
 						
-					}
-					 // Grap and get the file by WORKING_DIR/filelist.get(i).toString();
-					 // Save it to your local directory with its original name. 
+						String hostname = arg_object.getString("host");
+						String login =  arg_object.getString("username");
+						String password =  arg_object.getString("password");
+						String directory =  arg_object.getString("path");
+				 
+						java.util.Properties config = new java.util.Properties();
+						config.put("StrictHostKeyChecking", "no");
+				 
+						JSch ssh = new JSch();
+						Session session = ssh.getSession(login, hostname, 22);
+						session.setConfig(config);
+						session.setPassword(password);
+						session.connect();
+						Channel channel = session.openChannel("sftp");
+						channel.connect();
+				 
+						ChannelSftp sftp = (ChannelSftp) channel;
+						sftp.cd(directory);
+					 
+		 
+						
+						java.util.Vector filelist = sftp.ls(directory);
+						for(int i=0; i<filelist.size();i++){
+							callbackContext.success(filelist.get(i).toString());
+						 
+							 // Grap and get the file by WORKING_DIR/filelist.get(i).toString();
+							 // Save it to your local directory with its original name. 
 
-				}
-				
-		/*	java.util.Vector files = sftp.ls("*");
-				System.out.printf("Found %d files in dir %s%n", files.size(), directory);
+						}
+						
+				/*	java.util.Vector files = sftp.ls("*");
+						System.out.printf("Found %d files in dir %s%n", files.size(), directory);
+				 
+						for (ChannelSftp.LsEntry file : files) {
+							if (file.getAttrs().isDir()) {
+								continue;
+							}
+							//System.out.printf("Reading file : %s%n", file.getFilename());
+							BufferedReader bis = new BufferedReader(new InputStreamReader(sftp.get(file.getFilename())));
+							String line = null;
+							while ((line = bis.readLine()) != null) {
+								//System.out.println(line);
+								String name = line.getString(0);
+								String message = name;
+								callbackContext.success(message);
+							}
+							bis.close();
+						}
+						*/
 		 
-				for (ChannelSftp.LsEntry file : files) {
-					if (file.getAttrs().isDir()) {
-						continue;
+						String cadena = "";
+					 
+						callbackContext.success(cadena);
+				 
+				 
+				 
+						channel.disconnect();
+						session.disconnect();
+					} catch (JSchException e) {
+						callbackContext.error(e.getMessage().toString());
+						e.printStackTrace();  
+					} catch (SftpException e) {
+						callbackContext.error(e.getMessage().toString());
+						e.printStackTrace();
 					}
-					//System.out.printf("Reading file : %s%n", file.getFilename());
-					BufferedReader bis = new BufferedReader(new InputStreamReader(sftp.get(file.getFilename())));
-					String line = null;
-					while ((line = bis.readLine()) != null) {
-						//System.out.println(line);
-						String name = line.getString(0);
-						String message = name;
-						callbackContext.success(message);
-					}
-					bis.close();
 				}
-				*/
- 
-				String cadena = "";
+			});
 			 
-				callbackContext.success(cadena);
-		 
-		 
-		 
-				channel.disconnect();
-				session.disconnect();
-			} catch (JSchException e) {
-				callbackContext.error(e.getMessage().toString());
-				e.printStackTrace();  
-			} catch (SftpException e) {
-				callbackContext.error(e.getMessage().toString());
-				e.printStackTrace();
-			}
+			
 			
 			
 			
