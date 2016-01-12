@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<plugin xmlns="http://www.phonegap.com/ns/plugins/1.0"
+        id="com.ourcodeworld.sftpplugin"
+        version="0.7.0">
+
+  <name>Our Code World SFTP Plugin</name>
+
+  <engines>
+    <engine name="cordova" version=">=3.4.0"/>
+  </engines>
+
+  <asset src="www/ourcodeworldsftp.js" target="js/ourcodeworldsftp.js"/>
+
+  <js-module src="www/ourcodeworldsftp.js" name="OurCodeWorldSFTP">
+    <clobbers target="OurCodeWorldSFTP" />
+  </js-module>
+
+  <platform name="android">
+
+    <config-file target="res/xml/config.xml" parent="/*">
+      <feature name="Our Code World SFTP Plugin">
+        <param name="android-package" value="com.ourcodeworld.plugin.OurCodeWorldSFTP"/>
+      </feature>
+    </config-file>
+
+    <source-file src="src/android/OurCodeWorldSFTP.java" target-dir="src/com/ourcodeworld/plugin/"/>
+  </platform>
+</plugin>
