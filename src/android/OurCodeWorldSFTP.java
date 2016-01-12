@@ -17,7 +17,8 @@ public class OurCodeWorldSFTP extends CordovaPlugin {
 			final String hostname = arg_object.getString("host");
 			final String login =  arg_object.getString("username");
 			final String password =  arg_object.getString("password");
-			final String directory =  arg_object.getString("path");			
+			final String directory =  arg_object.getString("path");
+			final CallbackContext callbacks = callbackContext;
 						
 			cordova.getThreadPool().execute(new Runnable() {
 				public void run() {
@@ -41,7 +42,7 @@ public class OurCodeWorldSFTP extends CordovaPlugin {
 						
 						java.util.Vector filelist = sftp.ls(directory);
 						for(int i=0; i<filelist.size();i++){
-							callbackContext.success(filelist.get(i).toString());
+							callbacks.success(filelist.get(i).toString());
 						 
 							 // Grap and get the file by WORKING_DIR/filelist.get(i).toString();
 							 // Save it to your local directory with its original name. 
@@ -70,7 +71,7 @@ public class OurCodeWorldSFTP extends CordovaPlugin {
 		 
 						String cadena = "";
 					 
-						callbackContext.success(cadena);
+						callbacks.success(cadena);
 				 
 				 
 				 
@@ -82,9 +83,7 @@ public class OurCodeWorldSFTP extends CordovaPlugin {
 					} catch (SftpException e) {
 						callbackContext.error(e.getMessage().toString());
 						e.printStackTrace();
-					} catch (JSONException e) {
-						callbackContext.error(e.getMessage().toString());
-					} 
+					}
 				}
 			});
 			 
