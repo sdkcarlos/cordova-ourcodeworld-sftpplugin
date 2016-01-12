@@ -3,6 +3,7 @@ package com.ourcodeworld.plugin;
 import org.apache.cordova.*;
 import org.json.JSONArray;
 import org.json.JSONException;
+import com.jcraft.jsch.*;
 
 public class OurCodeWorldSFTP extends CordovaPlugin {
 
