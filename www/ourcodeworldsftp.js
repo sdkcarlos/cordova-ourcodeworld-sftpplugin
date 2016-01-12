@@ -33,7 +33,7 @@ module.exports = {
 			this._settings.path = '/root';	
 		}
 	},
-    connect: function (name, successCallback, errorCallback) {
+    connect: function (successCallback, errorCallback) {
 		var datos = this._settings;
 		cordova.exec(successCallback, errorCallback, "OurCodeWorldSFTP", "connect", [datos]);
         //cordova.exec(successCallback, errorCallback, "OurCodeWorldSFTP", "connect", [name]);
