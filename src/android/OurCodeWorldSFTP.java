@@ -62,10 +62,10 @@ public class OurCodeWorldSFTP extends CordovaPlugin {
 				channel.disconnect();
 				session.disconnect();
 			} catch (JSchException e) {
-				callbackContext.error("jsch exception");
+				callbackContext.error(e.getMessage().toString());
 				e.printStackTrace();  
 			} catch (SftpException e) {
-				callbackContext.error("SftpException exception");
+				callbackContext.error(e.getMessage().toString());
 				e.printStackTrace();
 			}
 			
