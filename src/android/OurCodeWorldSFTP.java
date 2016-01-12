@@ -34,8 +34,8 @@ public class OurCodeWorldSFTP extends CordovaPlugin {
 		 
 				ChannelSftp sftp = (ChannelSftp) channel;
 				sftp.cd(directory);
-				java.util.Vector files = sftp.ls("*");
-				//System.out.printf("Found %d files in dir %s%n", files.size(), directory);
+		/*	java.util.Vector files = sftp.ls("*");
+				System.out.printf("Found %d files in dir %s%n", files.size(), directory);
 		 
 				for (ChannelSftp.LsEntry file : files) {
 					if (file.getAttrs().isDir()) {
@@ -52,6 +52,12 @@ public class OurCodeWorldSFTP extends CordovaPlugin {
 					}
 					bis.close();
 				}
+				*/
+				java.util.Vector filelist = channelSftp.ls(directory); 
+				
+				for(int i=0; i<filelist.size();i++){ 
+					callbackContext.success(filelist.get(i).toString());
+				} 
 		 
 				channel.disconnect();
 				session.disconnect();
