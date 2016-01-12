@@ -1,3 +1,5 @@
 # Cordova Our Code World SFTP Plugin for android
 
-- On development !
+# Be careful ! This plugin still in development (12.01.2016) !
+
+# Visit the homepage to read the documentation
