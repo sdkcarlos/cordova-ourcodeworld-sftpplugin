@@ -12,16 +12,19 @@ public class OurCodeWorldSFTP extends CordovaPlugin {
     public boolean execute(String action, JSONArray data, CallbackContext callbackContext) throws JSONException {
 
         if (action.equals("connect")) {
-			
+			// We declare final variables  because we are passing an external variable.
+			final long duration = args.getLong(0);
+			final String hostname = arg_object.getString("host");
+			final String login =  arg_object.getString("username");
+			final String password =  arg_object.getString("password");
+			final String directory =  arg_object.getString("path");			
+						
 			cordova.getThreadPool().execute(new Runnable() {
 				public void run() {
 					try {
 						JSONObject arg_object = data.getJSONObject(0);
 						
-						String hostname = arg_object.getString("host");
-						String login =  arg_object.getString("username");
-						String password =  arg_object.getString("password");
-						String directory =  arg_object.getString("path");
+						
 				 
 						java.util.Properties config = new java.util.Properties();
 						config.put("StrictHostKeyChecking", "no");
