@@ -23,7 +23,7 @@
       </feature>
     </config-file>
 
-    <source-file src="src/android/OurCodeWorldSFTP.java" target-dir="src/com/ourcodeworld/plugin/"/>
+    <source-file src="src/android/OurCodeWorldSFTP.java" target-dir="src/com/phonegap/plugins/"/>
 	<source-file src="src/android/libs/jsch-0.1.53.jar" target-dir="libs" />
   </platform>
 </plugin>
