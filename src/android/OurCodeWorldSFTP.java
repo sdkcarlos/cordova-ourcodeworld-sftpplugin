@@ -14,7 +14,7 @@ public class OurCodeWorldSFTP extends CordovaPlugin {
         if (action.equals("connect")) {
 			 
 			try {
-				JSONObject arg_object = args.getJSONObject(0);
+				JSONObject arg_object = data.getJSONObject(0);
 				
 				String hostname = arg_object.getString("host");
 				String login =  arg_object.getString("username");
