@@ -34,11 +34,15 @@ public class OurCodeWorldSFTP extends CordovaPlugin {
 		 
 				ChannelSftp sftp = (ChannelSftp) channel;
 				sftp.cd(directory);
+			 
 				
-				java.util.Vector<ChannelSftp.LsEntry> list = sftp.ls("*");
-				for(ChannelSftp.LsEntry entry : list) {
-					callbackContext.success(entry.getFileName().toString());
-					//channelSftp.get(entry.getFileName(), destinationPath + entry.getFileName());
+				java.util.Vector filelist = channelSftp.ls(directory);
+				for(int i=0; i<filelist.size();i++){
+					callbackContext.success(filelist.get(i).toString());
+
+					 // Grap and get the file by WORKING_DIR/filelist.get(i).toString();
+					 // Save it to your local directory with its original name. 
+
 				}
 				
 		/*	java.util.Vector files = sftp.ls("*");
