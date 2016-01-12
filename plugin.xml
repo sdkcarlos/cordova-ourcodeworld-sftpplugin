@@ -18,8 +18,8 @@
   <platform name="android">
 
     <config-file target="res/xml/config.xml" parent="/*">
-      <feature name="Our Code World SFTP Plugin">
-        <param name="android-package" value="com.ourcodeworld.sftpplugin.OurCodeWorldSFTP"/>
+      <feature name="OurCodeWorldSFTP">
+        <param name="android-package" value="com.ourcodeworld.plugins.OurCodeWorldSFTP"/>
       </feature>
     </config-file>
 
