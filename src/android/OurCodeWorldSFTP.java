@@ -1,11 +1,11 @@
-package com.phonegap.plugins.ourcodeworldsftp;
+package com.ourcodeworld.sftpplugin;
 
 import org.apache.cordova.*;
 import org.json.JSONArray;
 import org.json.JSONException;
 import com.jcraft.jsch.*;
 
-public class ourcodeworldsftp extends CordovaPlugin {
+public class OurCodeWorldSFTP extends CordovaPlugin {
 
     @Override
     public boolean execute(String action, JSONArray data, CallbackContext callbackContext) throws JSONException {
