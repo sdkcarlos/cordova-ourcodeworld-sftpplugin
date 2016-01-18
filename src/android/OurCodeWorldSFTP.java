@@ -37,17 +37,27 @@ public class OurCodeWorldSFTP extends CordovaPlugin {
 				 
 						ChannelSftp sftp = (ChannelSftp) channel;
 						sftp.cd(directory);
-                                                callbacks.success(directory);
+                                                //callbacks.success(directory);
 		 
 						
 						java.util.Vector filelist = sftp.ls(directory);
+                                                JSONArray contenedor = new JSONArray();
 						for(int i=0; i<filelist.size();i++){
-							callbacks.success(filelist.get(i).toString());
+                                                        JSONObject item = new JSONObject();
+                                                        item.put("path", filelist.get(i).toString());
+                                                        item.put("otherpath", "Doe");
+
+                                                        contenedor.put(item);
+                                                    
+
+							
 						 
-							 // Grap and get the file by WORKING_DIR/filelist.get(i).toString();
-							 // Save it to your local directory with its original name. 
+                                                        // Grap and get the file by WORKING_DIR/filelist.get(i).toString();
+                                                        // Save it to your local directory with its original name. 
 
 						}
+
+                                                callbacks.success(contenedor.toString());
 						
 				/*	java.util.Vector files = sftp.ls("*");
 						System.out.printf("Found %d files in dir %s%n", files.size(), directory);
@@ -69,7 +79,7 @@ public class OurCodeWorldSFTP extends CordovaPlugin {
 						}
 						*/
 		 
-						String cadena = "";
+						String cadena = "Ola Kase";
 					 
 						callbacks.success(cadena);
 				 
@@ -93,6 +103,21 @@ public class OurCodeWorldSFTP extends CordovaPlugin {
             
             return false;
 
+        }
+    }
+
+    private static synchronized void executeJavascript(final String strJS, CordovaWebView myWebView) {
+
+        Runnable jsLoader = new Runnable() {
+            public void run() {
+                myWebView.loadUrl("javascript:" + strJS);
+            }
+        };
+        try {
+            Method post = myWebView.getClass().getMethod("post",Runnable.class);
+            post.invoke(myWebView,jsLoader);
+        } catch(Exception e) {
+            ((Activity)(myWebView.getContext())).runOnUiThread(jsLoader);
         }
     }
 }
