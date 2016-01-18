@@ -60,7 +60,7 @@ module.exports = {
             },
             listParent: function(success,error){
                 var parentPath = (this._settings.path).split("/").filter(function(n){ return n != undefined });
-                var path = LAST_FOLDER;
+                var path = "LAST_FOLDER";
                 parentPath.pop();
                 
                 if(parentPath.length == 1){
