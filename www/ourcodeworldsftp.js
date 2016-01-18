@@ -97,6 +97,17 @@ module.exports = {
                 }, function(err){
                     callbacks.error(err);
                 }, "OurCodeWorldSFTP", "upload", [datos]);
+            },
+            removeFile: function(remotePath,callbacks){
+                var datos = this._settings;
+                
+                datos.remotepath = remotePath;
+                
+                cordova.exec(function(data){
+                    callbacks.success(data);
+                }, function(err){
+                    callbacks.error(err);
+                }, "OurCodeWorldSFTP", "delete", [datos]);
             }
         };
     }

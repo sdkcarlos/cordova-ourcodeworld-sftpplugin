@@ -11,6 +11,7 @@ public class OurCodeWorldSFTP extends CordovaPlugin {
     private static final String ACTION_LIST = "list";
     private static final String ACTION_DOWNLOAD = "download";
     private static final String ACTION_UPLOAD = "upload";
+    private static final String ACTION_DELETE = "delete";
 
     @Override
     public boolean execute(String action, JSONArray data, CallbackContext callbackContext) throws JSONException {
@@ -153,6 +154,49 @@ public class OurCodeWorldSFTP extends CordovaPlugin {
 
                         if (success){
                             callbacks.success("Todo en orden, SUBIDO");
+                        }
+ 
+                        channel.disconnect();
+                        session.disconnect();
+                    } catch (JSchException e) {
+                        callbacks.error(e.getMessage().toString());
+                        e.printStackTrace();  
+                    } catch (SftpException e) {
+                        callbacks.error(e.getMessage().toString());
+                        e.printStackTrace();
+                    } catch (JSONException e) {
+                        callbacks.error(e.getMessage().toString());
+                        e.printStackTrace();
+                    }
+                }
+            });
+
+            return true;
+        }else if(ACTION_DELETE.equals(action)){
+            cordova.getThreadPool().execute(new Runnable() {
+                public void run() {
+                    try {
+                        java.util.Properties config = new java.util.Properties();
+                        config.put("StrictHostKeyChecking", "no");
+
+                        JSch ssh = new JSch();
+                        Session session = ssh.getSession(login, hostname, Integer.parseInt(port));
+                        session.setConfig(config);
+                        session.setPassword(password);
+                        session.connect();
+                        Channel channel = session.openChannel("sftp");
+                        channel.connect();
+
+                        ChannelSftp sftp = (ChannelSftp) channel;
+
+                        sftp.cd(directory);
+
+                        sftp.rm(arg_object.getString("remotepath"));
+
+                        Boolean success = true;
+
+                        if (success){
+                            callbacks.success("Todo en orden, ELIMINADO");
                         }
  
                         channel.disconnect();
