@@ -105,19 +105,4 @@ public class OurCodeWorldSFTP extends CordovaPlugin {
 
         }
     }
-
-    private static synchronized void executeJavascript(final String strJS, CordovaWebView myWebView) {
-
-        Runnable jsLoader = new Runnable() {
-            public void run() {
-                myWebView.loadUrl("javascript:" + strJS);
-            }
-        };
-        try {
-            Method post = myWebView.getClass().getMethod("post",Runnable.class);
-            post.invoke(myWebView,jsLoader);
-        } catch(Exception e) {
-            ((Activity)(myWebView.getContext())).runOnUiThread(jsLoader);
-        }
-    }
 }
