@@ -93,6 +93,9 @@ public class OurCodeWorldSFTP extends CordovaPlugin {
 					} catch (SftpException e) {
 						callbacks.error(e.getMessage().toString());
 						e.printStackTrace();
+					} catch (JSONException e) {
+						callbacks.error(e.getMessage().toString());
+						e.printStackTrace();
 					}
 				}
 			});
