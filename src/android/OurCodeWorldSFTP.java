@@ -5,6 +5,7 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 import com.jcraft.jsch.*;
+import com.jcraft.jsch.ChannelSftp.LsEntry;
 
 public class OurCodeWorldSFTP extends CordovaPlugin {
     private static final String ACTION_LIST = "list";
