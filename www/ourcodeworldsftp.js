@@ -74,16 +74,16 @@ module.exports = {
                 
                 return path;
             },
-            downloadFile: function(sourcePath,destinationPath){
+            downloadFile: function(sourcePath,destinationPath,callbacks){
                 var datos = this._settings;
                 
                 datos.filesource = sourcePath;
                 datos.filedestination = destinationPath;
                 
                 cordova.exec(function(data){
-                    success(data);
+                    callbacks.success(data);
                 }, function(err){
-                    error(err);
+                    callbacks.error(err);
                 }, "OurCodeWorldSFTP", "download", [datos]);
             }
         };
