@@ -27,11 +27,11 @@ module.exports = {
 		}
 	},
 	setPath: function(path){
-		if(typeof(path) === "undefined"){
-			this._settings.path = null;
-		}else{
-			this._settings.path = '/root';	
-		}
+            if(typeof(path) === "undefined"){
+                this._settings.path = '/root';
+            }else{
+                this._settings.path = path;	
+            }
 	},
     connect: function (successCallback, errorCallback) {
 		var datos = this._settings;
