@@ -33,9 +33,17 @@ module.exports = {
                 this._settings.path = path;	
             }
 	},
-    connect: function (successCallback, errorCallback) {
-		var datos = this._settings;
-		cordova.exec(successCallback, errorCallback, "OurCodeWorldSFTP", "connect", [datos]);
-        //cordova.exec(successCallback, errorCallback, "OurCodeWorldSFTP", "connect", [name]);
-    }
+        connect: function (successCallback, errorCallback) {
+            var datos = this._settings;
+            cordova.exec(successCallback, errorCallback, "OurCodeWorldSFTP", "connect", [datos]);
+            //cordova.exec(successCallback, errorCallback, "OurCodeWorldSFTP", "connect", [name]);
+        },
+        list: function(success,error){
+            var datos = this._settings;
+            cordova.exec(function(data){
+                success(JSON.parse(data));
+            }, function(err){
+                error(err);
+            }, "OurCodeWorldSFTP", "list", [datos]);
+        }
 };
