@@ -47,8 +47,6 @@ public class OurCodeWorldSFTP extends CordovaPlugin {
 
                                 final int i = flLst.size();
 
-                                java.util.List<String> flNmLst = new ArrayList<String>();
-
                                 for(int j=0;j<i;j++){
                                     JSONObject item = new JSONObject();
                                     item.put("path", flLst.get(j).getFilename());
