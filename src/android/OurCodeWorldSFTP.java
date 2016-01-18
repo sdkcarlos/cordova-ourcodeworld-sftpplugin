@@ -4,7 +4,11 @@ import org.apache.cordova.*;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
-import com.jcraft.jsch.*;
+//import com.jcraft.jsch.*;
+import com.jcraft.jsch.Channel;
+import com.jcraft.jsch.ChannelSftp;
+import com.jcraft.jsch.JSch;
+import com.jcraft.jsch.Session;
 
 public class OurCodeWorldSFTP extends CordovaPlugin {
     private static final String ACTION_LIST = "list";
