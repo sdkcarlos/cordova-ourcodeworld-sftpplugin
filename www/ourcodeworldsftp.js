@@ -73,6 +73,18 @@ module.exports = {
                 this.list(success,error);
                 
                 return path;
+            },
+            downloadFile: function(sourcePath,destinationPath){
+                var datos = this._settings;
+                
+                datos.filesource = sourcePath;
+                datos.filedestination = destinationPath;
+                
+                cordova.exec(function(data){
+                    success(data);
+                }, function(err){
+                    error(err);
+                }, "OurCodeWorldSFTP", "download", [datos]);
             }
         };
     }
