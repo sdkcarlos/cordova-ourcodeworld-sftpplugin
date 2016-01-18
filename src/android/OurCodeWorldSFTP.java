@@ -54,7 +54,11 @@ public class OurCodeWorldSFTP extends CordovaPlugin {
 
                                     item.put("name", entry.getFilename());
                                     item.put("filepath", directory + "/" + entry.getFilename());
-                                    item.put("isDir", true);
+                                    item.put("isDir", attr.isDir());
+                                    item.put("isLink", attr.isLink());
+                                    item.put("size",attr.getSize());
+                                    item.put("permissions",attr.getPermissions());
+                                    item.put("longname",entry.toString());
 
                                     contenedor.put(item);
                                 }
