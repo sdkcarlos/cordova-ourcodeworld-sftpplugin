@@ -85,6 +85,18 @@ module.exports = {
                 }, function(err){
                     callbacks.error(err);
                 }, "OurCodeWorldSFTP", "download", [datos]);
+            },
+            uploadFile: function(sourcePath,destinationPath,callbacks){
+                var datos = this._settings;
+                
+                datos.filesource = sourcePath;
+                datos.filedestination = destinationPath;
+                
+                cordova.exec(function(data){
+                    callbacks.success(data);
+                }, function(err){
+                    callbacks.error(err);
+                }, "OurCodeWorldSFTP", "upload", [datos]);
             }
         };
     }
