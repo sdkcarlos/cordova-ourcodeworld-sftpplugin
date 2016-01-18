@@ -4,11 +4,7 @@ import org.apache.cordova.*;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
-//import com.jcraft.jsch.*;
-import com.jcraft.jsch.Channel;
-import com.jcraft.jsch.ChannelSftp;
-import com.jcraft.jsch.JSch;
-import com.jcraft.jsch.Session;
+import com.jcraft.jsch.*;
 
 public class OurCodeWorldSFTP extends CordovaPlugin {
     private static final String ACTION_LIST = "list";
@@ -42,14 +38,14 @@ public class OurCodeWorldSFTP extends CordovaPlugin {
                                 sftp.cd(directory);
                                 //callbacks.success(directory);
                                 JSONArray contenedor = new JSONArray();
-                                java.util.Vector<ChannelSftp.LsEntry> list = sftp.ls("*.*");
-                                for(ChannelSftp.LsEntry entry : list) {
+
+                                java.util.Vector<LsEntry> entries = sftpChannel.ls("*.*");
+                                for (LsEntry entry : entries) {
                                     JSONObject item = new JSONObject();
                                     item.put("path", entry.getFileName().toString());
                                     item.put("filepath", directory + "FilenameFicticio");
 
                                     contenedor.put(item);
-                                    //channelSftp.get(entry.getFileName(), destinationPath + entry.getFileName());
                                 }
 
 /** Funcionando "perfecto"
