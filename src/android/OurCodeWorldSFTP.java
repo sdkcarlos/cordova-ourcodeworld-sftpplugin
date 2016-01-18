@@ -47,10 +47,14 @@ public class OurCodeWorldSFTP extends CordovaPlugin {
 
                                 final int i = flLst.size();
 
-                                for(int j=0;j<i;j++){
+                                for(int j = 0; j<i;j++){
                                     JSONObject item = new JSONObject();
-                                    item.put("path", flLst.get(j).getFilename());
-                                    item.put("filepath", directory + "FilenameFicticio");
+                                    LsEntry entry = flLst.get(j);
+                                    SftpATTRS attr = entry.getAttrs();
+
+                                    item.put("name", entry.getFilename());
+                                    item.put("filepath", directory + "/" + entry.getFilename());
+                                    item.put("isDir", true);
 
                                     contenedor.put(item);
                                 }
