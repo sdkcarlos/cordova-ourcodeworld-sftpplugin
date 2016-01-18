@@ -19,104 +19,66 @@ public class OurCodeWorldSFTP extends CordovaPlugin {
             final String login =  arg_object.getString("username");
             final String password =  arg_object.getString("password");
             final String directory =  arg_object.getString("path");
+            final String port =  arg_object.getString("port");
             final CallbackContext callbacks = callbackContext;
 
             cordova.getThreadPool().execute(new Runnable() {
-                    public void run() {
-                            try {
-                                java.util.Properties config = new java.util.Properties();
-                                config.put("StrictHostKeyChecking", "no");
+                public void run() {
+                    try {
+                        java.util.Properties config = new java.util.Properties();
+                        config.put("StrictHostKeyChecking", "no");
 
-                                JSch ssh = new JSch();
-                                Session session = ssh.getSession(login, hostname, 22);
-                                session.setConfig(config);
-                                session.setPassword(password);
-                                session.connect();
-                                Channel channel = session.openChannel("sftp");
-                                channel.connect();
+                        JSch ssh = new JSch();
+                        Session session = ssh.getSession(login, hostname, Integer.parseInt(port));
+                        session.setConfig(config);
+                        session.setPassword(password);
+                        session.connect();
+                        Channel channel = session.openChannel("sftp");
+                        channel.connect();
 
-                                ChannelSftp sftp = (ChannelSftp) channel;
+                        ChannelSftp sftp = (ChannelSftp) channel;
 
-                                sftp.cd(directory);
+                        sftp.cd(directory);
 
-                                JSONArray contenedor = new JSONArray();
+                        JSONArray contenedor = new JSONArray();
 
-                                @SuppressWarnings("unchecked")
+                        @SuppressWarnings("unchecked")
 
-                                java.util.Vector<LsEntry> flLst = sftp.ls(directory);
+                        java.util.Vector<LsEntry> flLst = sftp.ls(directory);
 
-                                final int i = flLst.size();
+                        final int i = flLst.size();
 
-                                for(int j = 0; j<i;j++){
-                                    JSONObject item = new JSONObject();
-                                    LsEntry entry = flLst.get(j);
-                                    SftpATTRS attr = entry.getAttrs();
+                        for(int j = 0; j<i ;j++){
+                            JSONObject item = new JSONObject();
+                            LsEntry entry = flLst.get(j);
+                            SftpATTRS attr = entry.getAttrs();
 
-                                    item.put("name", entry.getFilename());
-                                    item.put("filepath", directory + "/" + entry.getFilename());
-                                    item.put("isDir", attr.isDir());
-                                    item.put("isLink", attr.isLink());
-                                    item.put("size",attr.getSize());
-                                    item.put("permissions",attr.getPermissions());
-                                    item.put("longname",entry.toString());
+                            item.put("name", entry.getFilename());
+                            item.put("filepath", directory + "/" + entry.getFilename());
+                            item.put("isDir", attr.isDir());
+                            item.put("isLink", attr.isLink());
+                            item.put("size",attr.getSize());
+                            item.put("permissions",attr.getPermissions());
+                            item.put("permissions_string",attr.getPermissionsString());
+                            item.put("longname",entry.toString());
 
-                                    contenedor.put(item);
-                                }
-                              
-
-/** Funcionando "perfecto"
-                                java.util.Vector filelist = sftp.ls(directory);
-                                JSONArray contenedor = new JSONArray();
-                                for(int i=0; i<filelist.size();i++){
-                                    JSONObject item = new JSONObject();
-                                    item.put("path", filelist.get(i).toString());
-                                    item.put("filepath", directory + "FilenameFicticio");
-
-                                    contenedor.put(item);
-
-                                    // Grap and get the file by WORKING_DIR/filelist.get(i).toString();
-                                    // Save it to your local directory with its original name. 
-
-                                }
-*/
-                                
-
-                /*	java.util.Vector files = sftp.ls("*");
-                                System.out.printf("Found %d files in dir %s%n", files.size(), directory);
-
-                                for (ChannelSftp.LsEntry file : files) {
-                                        if (file.getAttrs().isDir()) {
-                                                continue;
-                                        }
-                                        //System.out.printf("Reading file : %s%n", file.getFilename());
-                                        BufferedReader bis = new BufferedReader(new InputStreamReader(sftp.get(file.getFilename())));
-                                        String line = null;
-                                        while ((line = bis.readLine()) != null) {
-                                                //System.out.println(line);
-                                                String name = line.getString(0);
-                                                String message = name;
-                                                callbackContext.success(message);
-                                        }
-                                        bis.close();
-                                }
-                                */
- 
-
-                                channel.disconnect();
-                                session.disconnect();
-
-                                callbacks.success(contenedor.toString());
-                        } catch (JSchException e) {
-                                callbacks.error(e.getMessage().toString());
-                                e.printStackTrace();  
-                        } catch (SftpException e) {
-                                callbacks.error(e.getMessage().toString());
-                                e.printStackTrace();
-                        } catch (JSONException e) {
-                                callbacks.error(e.getMessage().toString());
-                                e.printStackTrace();
+                            contenedor.put(item);
                         }
+
+                        channel.disconnect();
+                        session.disconnect();
+                        callbacks.success(contenedor.toString());
+                    } catch (JSchException e) {
+                        callbacks.error(e.getMessage().toString());
+                        e.printStackTrace();  
+                    } catch (SftpException e) {
+                        callbacks.error(e.getMessage().toString());
+                        e.printStackTrace();
+                    } catch (JSONException e) {
+                            callbacks.error(e.getMessage().toString());
+                            e.printStackTrace();
                     }
+                }
             });
 
             return true;
