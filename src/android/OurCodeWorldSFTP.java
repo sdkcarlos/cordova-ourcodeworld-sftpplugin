@@ -36,18 +36,27 @@ public class OurCodeWorldSFTP extends CordovaPlugin {
                                 channel.connect();
 
                                 ChannelSftp sftp = (ChannelSftp) channel;
+
                                 sftp.cd(directory);
-                                //callbacks.success(directory);
+
                                 JSONArray contenedor = new JSONArray();
 
-                                java.util.Vector<LsEntry> entries = sftp.ls("*.*");
-                                for (LsEntry entry : entries) {
+                                @SuppressWarnings("unchecked")
+
+                                java.util.Vector<LsEntry> flLst = sftp.ls(directory);
+
+                                final int i = flLst.size();
+
+                                List<string> flNmLst = new ArrayList<string>();
+
+                                for(int j=0;j<i;j++){
                                     JSONObject item = new JSONObject();
-                                    item.put("path", entry.getFileName().toString());
+                                    item.put("path", flLst.get(j).getFilename());
                                     item.put("filepath", directory + "FilenameFicticio");
 
                                     contenedor.put(item);
                                 }
+                              
 
 /** Funcionando "perfecto"
                                 java.util.Vector filelist = sftp.ls(directory);
