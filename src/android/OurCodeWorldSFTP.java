@@ -37,7 +37,7 @@ public class OurCodeWorldSFTP extends CordovaPlugin {
 				 
 						ChannelSftp sftp = (ChannelSftp) channel;
 						sftp.cd(directory);
-					 
+                                                callbacks.success(directory);
 		 
 						
 						java.util.Vector filelist = sftp.ls(directory);
@@ -86,15 +86,6 @@ public class OurCodeWorldSFTP extends CordovaPlugin {
 					}
 				}
 			});
-			 
-			
-			
-			
-			
-			
-            //String name = data.getString(0);
-            //String message = "SFTP CONNECTED:			" + name;
-            //callbackContext.success(message);
 
             return true;
 
