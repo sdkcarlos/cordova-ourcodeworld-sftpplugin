@@ -40,7 +40,7 @@ public class OurCodeWorldSFTP extends CordovaPlugin {
                                 //callbacks.success(directory);
                                 JSONArray contenedor = new JSONArray();
 
-                                java.util.Vector<LsEntry> entries = sftpChannel.ls("*.*");
+                                java.util.Vector<LsEntry> entries = sftp.ls("*.*");
                                 for (LsEntry entry : entries) {
                                     JSONObject item = new JSONObject();
                                     item.put("path", entry.getFileName().toString());
