@@ -29,7 +29,7 @@ public class OurCodeWorldSFTP extends CordovaPlugin {
                 public void run() {
                     try {
                         java.util.Properties config = new java.util.Properties();
-                        config.put("StrictHostKeyChecking", "no");
+                        //config.put("StrictHostKeyChecking", "no");
 
                         JSch ssh = new JSch();
                         Session session = ssh.getSession(login, hostname, Integer.parseInt(port));
