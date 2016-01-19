@@ -21,7 +21,6 @@ public class OurCodeWorldSFTP extends CordovaPlugin {
         final String password =  arg_object.getString("password");
         final String directory =  arg_object.getString("path");
         final String port =  arg_object.getString("port");
-        final String known_hosts =  arg_object.getString("known_hosts");
         final CallbackContext callbacks = callbackContext;
 
 
@@ -29,22 +28,12 @@ public class OurCodeWorldSFTP extends CordovaPlugin {
             cordova.getThreadPool().execute(new Runnable() {
                 public void run() {
                     try {
-                        JSch ssh = new JSch();
-                        String knownHostPublicKey = "|1|+ZbsMvcHGmkIccbzVayfr3ekHC0=|YurCIAEghs66L6ckjKazQ1JMEvc= ssh-rsa AAAAB3NzaC1yc2EAAAABIwAAAQEAulmKc+6C2kB3jOWYuCPZawCT6diS3TJiT9MoqNHs8GqDrf5rjEN8obB8BEZjQB6y3cyTMvGjcZP8wpKrygu6mWI+EQBghzM8+VcI7OtmH0y2rAB8ytRlIhe9+m8dzuJ4nSnW4x7a8MEb3T5qM9S6+OpVQeDNXQdN79pNuReeom0DY9BmtJDNjFUd2TOqk4FOuDnTNRF9aHc5diHV87TtbiQ7v4AXfPkGAlvDN9sSSYeaCWTxrUbldGJDeA+yBCH4k+cFN+qvmcI6s9guHC5AQLcnBkmQTkRKuGUj3yU5wXGSYt0/Sam+1Q7agZqw/OWmVRpVAWQYD/GFiaSMU75uxw== |1|P86D9XxntG9Z03NTOXM7OTwGwKU=|S4bY/7cZPaT9JchoMdOxnQ1bB5k= ssh-rsa AAAAB3NzaC1yc2EAAAABIwAAAQEAulmKc+6C2kB3jOWYuCPZawCT6diS3TJiT9MoqNHs8GqDrf5rjEN8obB8BEZjQB6y3cyTMvGjcZP8wpKrygu6mWI+EQBghzM8+VcI7OtmH0y2rAB8ytRlIhe9+m8dzuJ4nSnW4x7a8MEb3T5qM9S6+OpVQeDNXQdN79pNuReeom0DY9BmtJDNjFUd2TOqk4FOuDnTNRF9aHc5diHV87TtbiQ7v4AXfPkGAlvDN9sSSYeaCWTxrUbldGJDeA+yBCH4k+cFN+qvmcI6s9guHC5AQLcnBkmQTkRKuGUj3yU5wXGSYt0/Sam+1Q7agZqw/OWmVRpVAWQYD/GFiaSMU75uxw==";
+                        java.util.Properties config = new java.util.Properties();
+                        config.put("StrictHostKeyChecking", "no");
 
-                        ssh.setKnownHosts(new ByteArrayInputStream(knownHostPublicKey.getBytes()));
-                        //ssh.setKnownHosts(known_hosts);
-                        
+                        JSch ssh = new JSch();
                         Session session = ssh.getSession(login, hostname, Integer.parseInt(port));
-                        
-                        //if(known_hosts == ""){
-                        //    java.util.Properties config = new java.util.Properties();
-                        //    config.put("StrictHostKeyChecking", "no");
-                        //    session.setConfig(config);
-                        //}else{
-                            
-                        //}
-                        
+                        session.setConfig(config);
                         session.setPassword(password);
                         session.connect();
                         Channel channel = session.openChannel("sftp");
