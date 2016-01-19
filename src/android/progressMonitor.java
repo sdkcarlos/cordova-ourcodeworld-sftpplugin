@@ -11,7 +11,7 @@ public class progressMonitor implements SftpProgressMonitor{
     private long max                = 0;
     private long count              = 0;
     private long percent            = 0;
-    private static final CallbackContext callbacks = null;
+    private CallbackContext callbacks = null;
     
     
     public progressMonitor(CallbackContext callbackContext) {
