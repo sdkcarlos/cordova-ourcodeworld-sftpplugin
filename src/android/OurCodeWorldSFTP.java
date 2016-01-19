@@ -71,10 +71,13 @@ public class OurCodeWorldSFTP extends CordovaPlugin {
 
                         channel.disconnect();
                         session.disconnect();
-                        callbacks.sendPluginResult(new PluginResult(PluginResult.Status.OK, contenedor.toString()));
-                        callbacks.success(contenedor.toString());
-                        callbacks.success(contenedor.toString());
-                        callbacks.success(contenedor.toString());
+                        PluginResult result = new PluginResult(PluginResult.Status.OK, contenedor.toString());
+                        result.setKeepCallback(true);
+                        callbacks.sendPluginResult(result);
+                        
+                        PluginResult resulta = new PluginResult(PluginResult.Status.OK, contenedor.toString());
+                        resulta.setKeepCallback(true);
+                        callbacks.sendPluginResult(resulta);
                     } catch (JSchException e) {
                         callbacks.error(e.getMessage().toString());
                         e.printStackTrace();  
