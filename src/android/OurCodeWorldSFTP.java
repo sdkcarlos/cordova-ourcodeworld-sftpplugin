@@ -37,7 +37,7 @@ public class OurCodeWorldSFTP extends CordovaPlugin {
                             config.put("StrictHostKeyChecking", "no");
                             session.setConfig(config);
                         }else{
-                            session.setKnownHosts(known_hosts);
+                            ssh.setKnownHosts(known_hosts);
                         }
                         
                         session.setPassword(password);
