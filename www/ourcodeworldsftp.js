@@ -45,11 +45,6 @@ module.exports = {
             getPath: function(){
                 return this._settings.path;
             },
-            connect: function (successCallback, errorCallback) {
-                var datos = this._settings;
-                cordova.exec(successCallback, errorCallback, "OurCodeWorldSFTP", "connect", [datos]);
-                //cordova.exec(successCallback, errorCallback, "OurCodeWorldSFTP", "connect", [name]);
-            },
             list: function(success,error){
                 var datos = this._settings;
                 cordova.exec(function(data){

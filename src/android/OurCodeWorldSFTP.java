@@ -22,6 +22,7 @@ public class OurCodeWorldSFTP extends CordovaPlugin {
         final String directory =  arg_object.getString("path");
         final String port =  arg_object.getString("port");
         final CallbackContext callbacks = callbackContext;
+        final String callbackId = callbacks.getCallbackId();
 
 
         if (ACTION_LIST.equals(action)) {
@@ -70,7 +71,14 @@ public class OurCodeWorldSFTP extends CordovaPlugin {
 
                         channel.disconnect();
                         session.disconnect();
+                        
                         callbacks.success(contenedor.toString());
+                        callbacks.success(contenedor.toString());
+                        callbacks.success(contenedor.toString());
+                        
+                        PluginResult result = new PluginResult(PluginResult.Status.OK, contenedor.toString()); 
+                        result.setKeepCallback(false); 
+                        callbacks.success(result, callbackId);
                     } catch (JSchException e) {
                         callbacks.error(e.getMessage().toString());
                         e.printStackTrace();  
@@ -84,7 +92,9 @@ public class OurCodeWorldSFTP extends CordovaPlugin {
                 }
             });
 
-            return true;
+            PluginResult pluginResult = new  PluginResult(PluginResult.Status.NO_RESULT); 
+            pluginResult.setKeepCallback(true); 
+            return pluginResult;
 
         }else if(ACTION_DOWNLOAD.equals(action)){
             cordova.getThreadPool().execute(new Runnable() {
