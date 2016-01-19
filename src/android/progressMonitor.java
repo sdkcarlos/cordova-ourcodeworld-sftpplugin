@@ -21,8 +21,9 @@ public class progressMonitor implements SftpProgressMonitor{
         this.max = max;
         try{
             JSONObject item = new JSONObject();
-            item.put("started",true);
+            item.put("starting",true);
             item.put("from",src);
+            item.put("to",dest);
             item.put("filesize",max);
             PluginResult result = new PluginResult(PluginResult.Status.OK, item.toString());
             result.setKeepCallback(true);
