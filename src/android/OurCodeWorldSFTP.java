@@ -21,6 +21,7 @@ public class OurCodeWorldSFTP extends CordovaPlugin {
         final String password =  arg_object.getString("password");
         final String directory =  arg_object.getString("path");
         final String port =  arg_object.getString("port");
+        final String known_hosts =  arg_object.getString("known_hosts");
         final CallbackContext callbacks = callbackContext;
 
 
@@ -28,12 +29,17 @@ public class OurCodeWorldSFTP extends CordovaPlugin {
             cordova.getThreadPool().execute(new Runnable() {
                 public void run() {
                     try {
-                        java.util.Properties config = new java.util.Properties();
-                        //config.put("StrictHostKeyChecking", "no");
-
                         JSch ssh = new JSch();
                         Session session = ssh.getSession(login, hostname, Integer.parseInt(port));
-                        session.setConfig(config);
+                        
+                        if(known_hosts == ""){
+                            java.util.Properties config = new java.util.Properties();
+                            config.put("StrictHostKeyChecking", "no");
+                            session.setConfig(config);
+                        }else{
+                            session.setKnownHosts(known_hosts);
+                        }
+                        
                         session.setPassword(password);
                         session.connect();
                         Channel channel = session.openChannel("sftp");

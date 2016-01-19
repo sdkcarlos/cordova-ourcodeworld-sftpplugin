@@ -8,7 +8,8 @@ module.exports = {
                 username:null,
                 password:null,
                 path:'/root',
-                port:"22"
+                port:"22",
+                known_hosts:''
             },
             setCredentials: function(host,username,password,port){
                 if(typeof(host) === "undefined"){
@@ -111,6 +112,9 @@ module.exports = {
                 }, function(err){
                     callbacks.error(err);
                 }, "OurCodeWorldSFTP", "delete", [datos]);
+            },
+            setKnownHosts: function(knownHostPath){
+                this._settings.known_hosts = knownHostPath;
             }
         };
     }
