@@ -31,6 +31,9 @@ public class OurCodeWorldSFTP extends CordovaPlugin {
                     try {
                         JSch ssh = new JSch();
                         ssh.setKnownHosts(known_hosts);
+                        HostKeyRepository hkr = ssh.getHostKeyRepository();
+                        HostKey[] hks = hkr.getHostKey();
+                        ssh.getHostKeyRepository().add(hks);
                         Session session = ssh.getSession(login, hostname, Integer.parseInt(port));
                         
                         //if(known_hosts == ""){
