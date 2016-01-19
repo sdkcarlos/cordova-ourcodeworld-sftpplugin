@@ -35,9 +35,9 @@ public class progressMonitor implements SftpProgressMonitor{
             try{
                 JSONObject item = new JSONObject();
                 item.put("isOver",false);
-                item.put("percent",percent);
                 item.put("progress",this.percent);
-
+                item.put("totalbytes",max);
+                item.put("bytesprogress",this.count);
                 PluginResult result = new PluginResult(PluginResult.Status.OK, item.toString());
                 result.setKeepCallback(true);
                 callbacks.sendPluginResult(result);
@@ -52,7 +52,7 @@ public class progressMonitor implements SftpProgressMonitor{
     public void end(){
         try{
             JSONObject item = new JSONObject();
-            item.put("isOver",true);
+            item.put("finished",true);
             item.put("progress",this.percent);
 
             PluginResult result = new PluginResult(PluginResult.Status.OK, item.toString());
@@ -62,7 +62,5 @@ public class progressMonitor implements SftpProgressMonitor{
             callbacks.error(e.getMessage().toString());
             e.printStackTrace();
         }
-        //this.jsEvent("SFTPActionEnd", null);
-        //Log.d("SFTP Plugin - JJDLTC", "Action Finish");
     }
 }

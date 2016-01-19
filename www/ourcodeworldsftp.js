@@ -76,7 +76,11 @@ module.exports = {
                 datos.filedestination = destinationPath;
                 
                 cordova.exec(function(data){
-                    callbacks.success(data);
+                    try{
+                        callbacks.success(JSON.parse(data));
+                    }catch(e){
+                        callbacks.error(data);
+                    }
                 }, function(err){
                     callbacks.error(err);
                 }, "OurCodeWorldSFTP", "download", [datos]);
@@ -88,7 +92,11 @@ module.exports = {
                 datos.filedestination = destinationPath;
                 
                 cordova.exec(function(data){
-                    callbacks.success(data);
+                    try{
+                        callbacks.success(JSON.parse(data));
+                    }catch(e){
+                        callbacks.error(data);
+                    }
                 }, function(err){
                     callbacks.error(err);
                 }, "OurCodeWorldSFTP", "upload", [datos]);

@@ -114,7 +114,11 @@ public class OurCodeWorldSFTP extends CordovaPlugin {
                         Boolean success = true;
 
                         if (success){
-                            PluginResult result = new PluginResult(PluginResult.Status.OK, "Todo en orden, descargado");
+                            JSONObject item = new JSONObject();
+                            item.put("finished", true);
+                            item.put("success", true);
+                            
+                            PluginResult result = new PluginResult(PluginResult.Status.OK, item.toString());
                             result.setKeepCallback(true);
                             callbacks.sendPluginResult(result);
                         }
