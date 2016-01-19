@@ -32,13 +32,13 @@ public class OurCodeWorldSFTP extends CordovaPlugin {
                         JSch ssh = new JSch();
                         Session session = ssh.getSession(login, hostname, Integer.parseInt(port));
                         
-                        if(known_hosts == ""){
-                            java.util.Properties config = new java.util.Properties();
-                            config.put("StrictHostKeyChecking", "no");
-                            session.setConfig(config);
-                        }else{
+                        //if(known_hosts == ""){
+                        //    java.util.Properties config = new java.util.Properties();
+                        //    config.put("StrictHostKeyChecking", "no");
+                        //    session.setConfig(config);
+                        //}else{
                             ssh.setKnownHosts(known_hosts);
-                        }
+                        //}
                         
                         session.setPassword(password);
                         session.connect();
