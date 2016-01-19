@@ -35,8 +35,8 @@ public class progressMonitor implements SftpProgressMonitor{
             try{
                 JSONObject item = new JSONObject();
                 item.put("isOver",false);
-                item.put("percent",percent.toString());
-                item.put("progress",this.percent.toString());
+                item.put("percent",percent);
+                item.put("progress",this.percent);
 
                 PluginResult result = new PluginResult(PluginResult.Status.OK, item.toString());
                 result.setKeepCallback(true);
@@ -53,7 +53,7 @@ public class progressMonitor implements SftpProgressMonitor{
         try{
             JSONObject item = new JSONObject();
             item.put("isOver",true);
-            item.put("progress",this.percent.toString());
+            item.put("progress",this.percent);
 
             PluginResult result = new PluginResult(PluginResult.Status.OK, item.toString());
             result.setKeepCallback(true);
