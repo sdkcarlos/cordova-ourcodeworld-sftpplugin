@@ -160,12 +160,18 @@ public class OurCodeWorldSFTP extends CordovaPlugin {
 
                         sftp.cd(directory);
 
-                        sftp.put(arg_object.getString("filesource") , arg_object.getString("filedestination"));
+                        sftp.put(arg_object.getString("filesource") , arg_object.getString("filedestination"),new progressMonitor(callbacks));
 
                         Boolean success = true;
 
                         if (success){
-                            callbacks.success("Todo en orden, SUBIDO");
+                            JSONObject item = new JSONObject();
+                            item.put("finished", true);
+                            item.put("success", true);
+                            
+                            PluginResult result = new PluginResult(PluginResult.Status.OK, item.toString());
+                            result.setKeepCallback(true);
+                            callbacks.sendPluginResult(result);
                         }
  
                         channel.disconnect();
