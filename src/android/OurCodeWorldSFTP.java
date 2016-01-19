@@ -90,8 +90,8 @@ public class OurCodeWorldSFTP extends CordovaPlugin {
 
             PluginResult pluginResult = new  PluginResult(PluginResult.Status.NO_RESULT); 
             pluginResult.setKeepCallback(true); 
-            return pluginResult;
-
+            //return pluginResult;
+            return true;
         }else if(ACTION_DOWNLOAD.equals(action)){
             cordova.getThreadPool().execute(new Runnable() {
                 public void run() {
