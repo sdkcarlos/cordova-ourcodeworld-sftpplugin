@@ -109,7 +109,7 @@ public class OurCodeWorldSFTP extends CordovaPlugin {
 
                         sftp.cd(directory);
 
-                        sftp.get(arg_object.getString("filesource") , arg_object.getString("filedestination"),new progressMonitor(this.callbacks));
+                        sftp.get(arg_object.getString("filesource") , arg_object.getString("filedestination"),new progressMonitor(callbacks));
 
                         Boolean success = true;
 
