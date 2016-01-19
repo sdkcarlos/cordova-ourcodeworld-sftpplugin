@@ -30,10 +30,11 @@ public class OurCodeWorldSFTP extends CordovaPlugin {
                 public void run() {
                     try {
                         JSch ssh = new JSch();
-                        ssh.setKnownHosts(known_hosts);
-                        HostKeyRepository hkr = ssh.getHostKeyRepository();
-                        HostKey[] hks = hkr.getHostKey();
-                        ssh.getHostKeyRepository().add(hks);
+                        String knownHostPublicKey = "|1|+ZbsMvcHGmkIccbzVayfr3ekHC0=|YurCIAEghs66L6ckjKazQ1JMEvc= ssh-rsa AAAAB3NzaC1yc2EAAAABIwAAAQEAulmKc+6C2kB3jOWYuCPZawCT6diS3TJiT9MoqNHs8GqDrf5rjEN8obB8BEZjQB6y3cyTMvGjcZP8wpKrygu6mWI+EQBghzM8+VcI7OtmH0y2rAB8ytRlIhe9+m8dzuJ4nSnW4x7a8MEb3T5qM9S6+OpVQeDNXQdN79pNuReeom0DY9BmtJDNjFUd2TOqk4FOuDnTNRF9aHc5diHV87TtbiQ7v4AXfPkGAlvDN9sSSYeaCWTxrUbldGJDeA+yBCH4k+cFN+qvmcI6s9guHC5AQLcnBkmQTkRKuGUj3yU5wXGSYt0/Sam+1Q7agZqw/OWmVRpVAWQYD/GFiaSMU75uxw== |1|P86D9XxntG9Z03NTOXM7OTwGwKU=|S4bY/7cZPaT9JchoMdOxnQ1bB5k= ssh-rsa AAAAB3NzaC1yc2EAAAABIwAAAQEAulmKc+6C2kB3jOWYuCPZawCT6diS3TJiT9MoqNHs8GqDrf5rjEN8obB8BEZjQB6y3cyTMvGjcZP8wpKrygu6mWI+EQBghzM8+VcI7OtmH0y2rAB8ytRlIhe9+m8dzuJ4nSnW4x7a8MEb3T5qM9S6+OpVQeDNXQdN79pNuReeom0DY9BmtJDNjFUd2TOqk4FOuDnTNRF9aHc5diHV87TtbiQ7v4AXfPkGAlvDN9sSSYeaCWTxrUbldGJDeA+yBCH4k+cFN+qvmcI6s9guHC5AQLcnBkmQTkRKuGUj3yU5wXGSYt0/Sam+1Q7agZqw/OWmVRpVAWQYD/GFiaSMU75uxw==";
+
+                        ssh.setKnownHosts(new ByteArrayInputStream(knownHostPublicKey.getBytes()));
+                        //ssh.setKnownHosts(known_hosts);
+                        
                         Session session = ssh.getSession(login, hostname, Integer.parseInt(port));
                         
                         //if(known_hosts == ""){
