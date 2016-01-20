@@ -2,60 +2,83 @@
 
 module.exports = {
     createSFTPClient: function(){
+        //This variable will be private
+        var _settings = {
+            host:null,
+            username:null,
+            password:null,
+            path:'/root',
+            port:"22",
+            identity: null
+        };
+        
         return {
-            _settings:{
-                host:null,
-                username:null,
-                password:null,
-                path:'/root',
-                port:"22",
-                identity: null
-            },
             setCredentials: function(host,username,password,port){
                 if(typeof(host) === "undefined"){
-                    this._settings.host = null;
+                    _settings.host = null;
                 }else{
-                    this._settings.host = host;	
+                    _settings.host = host;	
                 }
 
                 if(typeof(username) === "undefined"){
-                    this._settings.username = null;
+                    _settings.username = null;
                 }else{
-                    this._settings.username = username;	
+                    _settings.username = username;	
                 }
 
                 if(typeof(password) === "undefined"){
-                    this._settings.password = null;
+                    _settings.password = null;
                 }else{
-                    this._settings.password = password;
+                    _settings.password = password;
                 }
 
                 if(typeof(port) === "undefined"){
-                    this._settings.port = "22";
+                    _settings.port = "22";
                 }else{
-                    this._settings.port = port.toString();	
+                    _settings.port = port.toString();	
                 }
             },
+            /**
+             * Set the global path of the remote connection
+             * 
+             * @default /root
+             * @param {type} path
+             * @returns {undefined}
+             */
             setPath: function(path){
                 if(typeof(path) === "undefined"){
-                    this._settings.path = '/root';
+                    _settings.path = '/root';
                 }else{
-                    this._settings.path = path;	
+                    _settings.path = path;	
                 }
             },
             getPath: function(){
-                return this._settings.path;
+                return _settings.path;
             },
+            /**
+             * Returns a json object with the information of all folders and files of the global path
+             * 
+             * @param {type} success
+             * @param {type} error
+             * @returns {undefined}
+             */
             list: function(success,error){
-                var datos = this._settings;
+                var datos = _settings;
                 cordova.exec(function(data){
                     success(JSON.parse(data));
                 }, function(err){
                     error(err);
                 }, "OurCodeWorldSFTP", "list", [datos]);
             },
+            /**
+             * List the parent folder of the global path
+             * 
+             * @param {type} success
+             * @param {type} error
+             * @returns {module.exports.createSFTPClient.ourcodeworldsftpAnonym$0.listParent.path|String}
+             */
             listParent: function(success,error){
-                var parentPath = (this._settings.path).split("/").filter(function(n){ return n != undefined });
+                var parentPath = (_settings.path).split("/").filter(function(n){ return n != undefined });
                 var path = "LAST_FOLDER";
                 parentPath.pop();
                 
@@ -65,13 +88,13 @@ module.exports = {
                     path = parentPath.join("/");
                 }
                 
-                this.setPath(path);
-                this.list(success,error);
+                setPath(path);
+                list(success,error);
                 
                 return path;
             },
             downloadFile: function(sourcePath,destinationPath,callbacks){
-                var datos = this._settings;
+                var datos = _settings;
                 
                 datos.filesource = sourcePath;
                 datos.filedestination = destinationPath;
@@ -87,7 +110,7 @@ module.exports = {
                 }, "OurCodeWorldSFTP", "download", [datos]);
             },
             uploadFile: function(sourcePath,destinationPath,callbacks){
-                var datos = this._settings;
+                var datos = _settings;
                 
                 datos.filesource = sourcePath;
                 datos.filedestination = destinationPath;
@@ -103,7 +126,7 @@ module.exports = {
                 }, "OurCodeWorldSFTP", "upload", [datos]);
             },
             removeFile: function(remotePath,callbacks){
-                var datos = this._settings;
+                var datos = _settings;
                 
                 datos.remotepath = remotePath;
                 
@@ -113,8 +136,15 @@ module.exports = {
                     callbacks.error(err);
                 }, "OurCodeWorldSFTP", "delete", [datos]);
             },
-            addIdentity: function(filepath){
-                this._settings.identity = filepath;
+            /**
+             * If you need to add a private key to the connection use the addIdentity method
+             * null to remove a identity and string to give a path
+             * 
+             * @param {type} filepath
+             * @returns {undefined}
+             */
+            setIdentity: function(filepath){
+                _settings.identity = filepath;
             }
         };
     }
