@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <plugin xmlns="http://www.phonegap.com/ns/plugins/1.0"
         id="com.ourcodeworld.sftpplugin"
-        version="0.7.0">
+        version="0.5.0">
 
   <name>Our Code World SFTP Plugin</name>
 
@@ -19,7 +19,7 @@
 
     <config-file target="res/xml/config.xml" parent="/*">
       <feature name="OurCodeWorldSFTP">
-        <param name="android-package" value="com.ourcodeworld.plugins.OurCodeWorldSFTP"/>
+        <param name="android-package" value="com.ourcodeworld.plugins.sftp.OurCodeWorldSFTP"/>
       </feature>
     </config-file>
 

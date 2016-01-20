@@ -1,4 +1,4 @@
-package com.ourcodeworld.plugins;
+package com.ourcodeworld.plugins.sftp;
 
 import org.apache.cordova.*;
 import com.jcraft.jsch.SftpProgressMonitor;
