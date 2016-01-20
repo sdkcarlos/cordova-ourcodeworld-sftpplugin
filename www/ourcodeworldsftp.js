@@ -8,7 +8,8 @@ module.exports = {
                 username:null,
                 password:null,
                 path:'/root',
-                port:"22"
+                port:"22",
+                identity: null
             },
             setCredentials: function(host,username,password,port){
                 if(typeof(host) === "undefined"){
@@ -111,6 +112,9 @@ module.exports = {
                 }, function(err){
                     callbacks.error(err);
                 }, "OurCodeWorldSFTP", "delete", [datos]);
+            },
+            addIdentity: function(filepath){
+                this._settings.identity = filepath;
             }
         };
     }
