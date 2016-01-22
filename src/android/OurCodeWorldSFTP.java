@@ -21,6 +21,14 @@ public class OurCodeWorldSFTP extends CordovaPlugin {
         final String password =  arg_object.getString("password");
         final String directory =  arg_object.getString("path");
         final String port =  arg_object.getString("port");
+
+        if (!arg_object.isNull("known_hosts")){
+            final String known_hosts = arg_object.getString("known_hosts");
+        }else{
+            final String known_hosts = 'DO_NOT_USE';
+        }
+
+        final String known_hosts =  arg_object.getString("password");
         final CallbackContext callbacks = callbackContext;
 
 
@@ -32,6 +40,9 @@ public class OurCodeWorldSFTP extends CordovaPlugin {
                         config.put("StrictHostKeyChecking", "no");
 
                         JSch ssh = new JSch();
+                        if(!known_hosts.equals('DO_NOT_USE')){
+                            ssh.setKnownHosts(known_hosts);
+                        }
                         Session session = ssh.getSession(login, hostname, Integer.parseInt(port));
                         session.setConfig(config);
 
@@ -104,6 +115,9 @@ public class OurCodeWorldSFTP extends CordovaPlugin {
                         config.put("StrictHostKeyChecking", "no");
 
                         JSch ssh = new JSch();
+                        if(!known_hosts.equals('DO_NOT_USE')){
+                            ssh.setKnownHosts(known_hosts);
+                        }
                         Session session = ssh.getSession(login, hostname, Integer.parseInt(port));
                         session.setConfig(config);
 
@@ -161,6 +175,9 @@ public class OurCodeWorldSFTP extends CordovaPlugin {
                         config.put("StrictHostKeyChecking", "no");
 
                         JSch ssh = new JSch();
+                        if(!known_hosts.equals('DO_NOT_USE')){
+                            ssh.setKnownHosts(known_hosts);
+                        }
                         Session session = ssh.getSession(login, hostname, Integer.parseInt(port));
                         session.setConfig(config);
 
@@ -216,6 +233,9 @@ public class OurCodeWorldSFTP extends CordovaPlugin {
                         config.put("StrictHostKeyChecking", "no");
 
                         JSch ssh = new JSch();
+                        if(!known_hosts.equals('DO_NOT_USE')){
+                            ssh.setKnownHosts(known_hosts);
+                        }
                         Session session = ssh.getSession(login, hostname, Integer.parseInt(port));
                         session.setConfig(config);
 

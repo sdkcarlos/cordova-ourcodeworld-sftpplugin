@@ -9,7 +9,8 @@ module.exports = {
             password:null,
             path:'/root',
             port:"22",
-            identity: null
+            identity: null,
+            known_hosts:null
         };
         
         return {
@@ -145,6 +146,9 @@ module.exports = {
              */
             setIdentity: function(filepath){
                 _settings.identity = filepath;
+            },
+            setKnownHosts: function(filepath){
+                _settings.known_hosts = filepath;
             }
         };
     }
