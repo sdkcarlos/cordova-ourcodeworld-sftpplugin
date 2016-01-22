@@ -32,14 +32,15 @@ public class OurCodeWorldSFTP extends CordovaPlugin {
                         config.put("StrictHostKeyChecking", "no");
 
                         JSch ssh = new JSch();
-                        
-                        if (!arg_object.isNull("identity")){
-                            ssh.addIdentity(arg_object.getString("identity"));
-                        }
-                        
                         Session session = ssh.getSession(login, hostname, Integer.parseInt(port));
                         session.setConfig(config);
-                        session.setPassword(password);
+
+                        if (!arg_object.isNull("identity")){
+                            ssh.addIdentity(arg_object.getString("identity"));
+                        }else{
+                            session.setPassword(password);
+                        }
+                        
                         session.connect();
                         Channel channel = session.openChannel("sftp");
                         channel.connect();
@@ -103,12 +104,15 @@ public class OurCodeWorldSFTP extends CordovaPlugin {
                         config.put("StrictHostKeyChecking", "no");
 
                         JSch ssh = new JSch();
-                        if (!arg_object.isNull("identity")){
-                            ssh.addIdentity(arg_object.getString("identity"));
-                        }
                         Session session = ssh.getSession(login, hostname, Integer.parseInt(port));
                         session.setConfig(config);
-                        session.setPassword(password);
+
+                        if (!arg_object.isNull("identity")){
+                            ssh.addIdentity(arg_object.getString("identity"));
+                        }else{
+                            session.setPassword(password);
+                        }
+
                         session.connect();
                         Channel channel = session.openChannel("sftp");
                         channel.connect();
@@ -157,12 +161,15 @@ public class OurCodeWorldSFTP extends CordovaPlugin {
                         config.put("StrictHostKeyChecking", "no");
 
                         JSch ssh = new JSch();
-                        if (!arg_object.isNull("identity")){
-                            ssh.addIdentity(arg_object.getString("identity"));
-                        }
                         Session session = ssh.getSession(login, hostname, Integer.parseInt(port));
                         session.setConfig(config);
-                        session.setPassword(password);
+
+                        if (!arg_object.isNull("identity")){
+                            ssh.addIdentity(arg_object.getString("identity"));
+                        }else{
+                            session.setPassword(password);
+                        }
+
                         session.connect();
                         Channel channel = session.openChannel("sftp");
                         channel.connect();
@@ -209,12 +216,15 @@ public class OurCodeWorldSFTP extends CordovaPlugin {
                         config.put("StrictHostKeyChecking", "no");
 
                         JSch ssh = new JSch();
-                        if (!arg_object.isNull("identity")){
-                            ssh.addIdentity(arg_object.getString("identity"));
-                        }
                         Session session = ssh.getSession(login, hostname, Integer.parseInt(port));
                         session.setConfig(config);
-                        session.setPassword(password);
+
+                        if (!arg_object.isNull("identity")){
+                            ssh.addIdentity(arg_object.getString("identity"));
+                        }else{
+                            session.setPassword(password);
+                        }
+
                         session.connect();
                         Channel channel = session.openChannel("sftp");
                         channel.connect();
