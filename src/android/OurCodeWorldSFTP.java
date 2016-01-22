@@ -228,7 +228,10 @@ public class OurCodeWorldSFTP extends CordovaPlugin {
                         Boolean success = true;
 
                         if (success){
-                            callbacks.success("Todo en orden, ELIMINADO");
+                            JSONObject deleted = new JSONObject();
+                            deleted.put("deleted", true);
+                            
+                            callbacks.success(deleted.toString());
                         }
  
                         channel.disconnect();
