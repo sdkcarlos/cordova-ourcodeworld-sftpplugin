@@ -36,15 +36,16 @@ public class OurCodeWorldSFTP extends CordovaPlugin {
             cordova.getThreadPool().execute(new Runnable() {
                 public void run() {
                     try {
-                        java.util.Properties config = new java.util.Properties();
-                        config.put("StrictHostKeyChecking", "no");
-
                         JSch ssh = new JSch();
+                        Session session = ssh.getSession(login, hostname, Integer.parseInt(port));
+
                         if(!known_hosts.equals('DO_NOT_USE')){
                             ssh.setKnownHosts(known_hosts);
+                        }else{
+                            java.util.Properties config = new java.util.Properties();
+                            config.put("StrictHostKeyChecking", "no");
+                            session.setConfig(config);
                         }
-                        Session session = ssh.getSession(login, hostname, Integer.parseInt(port));
-                        session.setConfig(config);
 
                         if (!arg_object.isNull("identity")){
                             ssh.addIdentity(arg_object.getString("identity"));
@@ -111,15 +112,16 @@ public class OurCodeWorldSFTP extends CordovaPlugin {
             cordova.getThreadPool().execute(new Runnable() {
                 public void run() {
                     try {
-                        java.util.Properties config = new java.util.Properties();
-                        config.put("StrictHostKeyChecking", "no");
-
                         JSch ssh = new JSch();
+                        Session session = ssh.getSession(login, hostname, Integer.parseInt(port));
+
                         if(!known_hosts.equals('DO_NOT_USE')){
                             ssh.setKnownHosts(known_hosts);
+                        }else{
+                            java.util.Properties config = new java.util.Properties();
+                            config.put("StrictHostKeyChecking", "no");
+                            session.setConfig(config);
                         }
-                        Session session = ssh.getSession(login, hostname, Integer.parseInt(port));
-                        session.setConfig(config);
 
                         if (!arg_object.isNull("identity")){
                             ssh.addIdentity(arg_object.getString("identity"));
@@ -171,15 +173,16 @@ public class OurCodeWorldSFTP extends CordovaPlugin {
             cordova.getThreadPool().execute(new Runnable() {
                 public void run() {
                     try {
-                        java.util.Properties config = new java.util.Properties();
-                        config.put("StrictHostKeyChecking", "no");
-
                         JSch ssh = new JSch();
+                        Session session = ssh.getSession(login, hostname, Integer.parseInt(port));
+                        
                         if(!known_hosts.equals('DO_NOT_USE')){
                             ssh.setKnownHosts(known_hosts);
+                        }else{
+                            java.util.Properties config = new java.util.Properties();
+                            config.put("StrictHostKeyChecking", "no");
+                            session.setConfig(config);
                         }
-                        Session session = ssh.getSession(login, hostname, Integer.parseInt(port));
-                        session.setConfig(config);
 
                         if (!arg_object.isNull("identity")){
                             ssh.addIdentity(arg_object.getString("identity"));
@@ -229,15 +232,16 @@ public class OurCodeWorldSFTP extends CordovaPlugin {
             cordova.getThreadPool().execute(new Runnable() {
                 public void run() {
                     try {
-                        java.util.Properties config = new java.util.Properties();
-                        config.put("StrictHostKeyChecking", "no");
-
                         JSch ssh = new JSch();
+                        Session session = ssh.getSession(login, hostname, Integer.parseInt(port));
+                        
                         if(!known_hosts.equals('DO_NOT_USE')){
                             ssh.setKnownHosts(known_hosts);
+                        }else{
+                            java.util.Properties config = new java.util.Properties();
+                            config.put("StrictHostKeyChecking", "no");
+                            session.setConfig(config);
                         }
-                        Session session = ssh.getSession(login, hostname, Integer.parseInt(port));
-                        session.setConfig(config);
 
                         if (!arg_object.isNull("identity")){
                             ssh.addIdentity(arg_object.getString("identity"));
