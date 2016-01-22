@@ -2,7 +2,7 @@
 
 # The plugin is ready and can be used in production.
 
-# Visit the homepage to read the documentation (still in development)
+#[Visit the homepage to read the documentation](https://sdkcarlos.github.io/sites/cordova-sftp-plugin.html)
 
 # Installation
 
