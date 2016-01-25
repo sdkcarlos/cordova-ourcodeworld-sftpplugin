@@ -25,7 +25,7 @@ public class OurCodeWorldSFTP extends CordovaPlugin {
         final String known_hosts = "DO_NOT_USE";
 
         if (!arg_object.isNull("known_hosts")){
-            final String known_hosts = arg_object.getString("known_hosts");
+            known_hosts = arg_object.getString("known_hosts");
         }
 
         //final String known_hosts =  arg_object.getString("password");
