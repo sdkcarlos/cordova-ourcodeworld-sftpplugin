@@ -25,7 +25,7 @@ public class OurCodeWorldSFTP extends CordovaPlugin {
         if (!arg_object.isNull("known_hosts")){
             final String known_hosts = arg_object.getString("known_hosts");
         }else{
-            final String known_hosts = 'DO_NOT_USE';
+            final String known_hosts = "DO_NOT_USE";
         }
 
         final String known_hosts =  arg_object.getString("password");
@@ -39,7 +39,7 @@ public class OurCodeWorldSFTP extends CordovaPlugin {
                         JSch ssh = new JSch();
                         Session session = ssh.getSession(login, hostname, Integer.parseInt(port));
 
-                        if(!known_hosts.equals('DO_NOT_USE')){
+                        if(!known_hosts.equals("DO_NOT_USE")){
                             ssh.setKnownHosts(known_hosts);
                         }else{
                             java.util.Properties config = new java.util.Properties();
@@ -115,7 +115,7 @@ public class OurCodeWorldSFTP extends CordovaPlugin {
                         JSch ssh = new JSch();
                         Session session = ssh.getSession(login, hostname, Integer.parseInt(port));
 
-                        if(!known_hosts.equals('DO_NOT_USE')){
+                        if(!known_hosts.equals("DO_NOT_USE")){
                             ssh.setKnownHosts(known_hosts);
                         }else{
                             java.util.Properties config = new java.util.Properties();
@@ -176,7 +176,7 @@ public class OurCodeWorldSFTP extends CordovaPlugin {
                         JSch ssh = new JSch();
                         Session session = ssh.getSession(login, hostname, Integer.parseInt(port));
                         
-                        if(!known_hosts.equals('DO_NOT_USE')){
+                        if(!known_hosts.equals("DO_NOT_USE")){
                             ssh.setKnownHosts(known_hosts);
                         }else{
                             java.util.Properties config = new java.util.Properties();
@@ -235,7 +235,7 @@ public class OurCodeWorldSFTP extends CordovaPlugin {
                         JSch ssh = new JSch();
                         Session session = ssh.getSession(login, hostname, Integer.parseInt(port));
                         
-                        if(!known_hosts.equals('DO_NOT_USE')){
+                        if(!known_hosts.equals("DO_NOT_USE")){
                             ssh.setKnownHosts(known_hosts);
                         }else{
                             java.util.Properties config = new java.util.Properties();
