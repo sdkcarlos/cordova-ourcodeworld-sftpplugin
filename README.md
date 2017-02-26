@@ -1,8 +1,10 @@
 # Cordova Our Code World SFTP Plugin for android
 
-# The plugin is ready and can be used in production.
+This plugin can be used in production.
 
-#[Visit the homepage to read the documentation](https://sdkcarlos.github.io/sites/cordova/sftp-plugin.html)
+#[Visit the homepage](https://sdkcarlos.github.io/sites/cordova/sftp-plugin.html)
+
+#[Read the documentation](http://docs.ourcodeworld.com/projects/cordova-our-code-world-sftp-plugin)
 
 # Installation
 
@@ -11,4 +13,3 @@ Get the plugin into your android project with :
 ```batch
 cordova plugin add https://github.com/sdkcarlos/cordova-ourcodeworld-sftpplugin.git
 ```
-
