@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <plugin xmlns="http://www.phonegap.com/ns/plugins/1.0"
         id="com.ourcodeworld.sftpplugin"
-        version="0.5.0">
+        version="0.5.1">
 
   <name>Our Code World SFTP Plugin</name>
 

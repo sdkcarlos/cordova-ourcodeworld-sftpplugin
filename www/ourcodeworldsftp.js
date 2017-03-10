@@ -132,10 +132,44 @@ module.exports = {
                 datos.remotepath = remotePath;
                 
                 cordova.exec(function(data){
-                    callbacks.success(data);
+                    try{
+                        callbacks.success(JSON.parse(data));
+                    }catch(e){
+                        callbacks.error(data);
+                    }
                 }, function(err){
                     callbacks.error(err);
                 }, "OurCodeWorldSFTP", "delete", [datos]);
+            },
+            removeFolder: function(remotePathToDelete,callbacks){
+                var datos = _settings;
+                
+                datos.remotepath = remotePathToDelete;
+                
+                cordova.exec(function(data){
+                    try{
+                        callbacks.success(JSON.parse(data));
+                    }catch(e){
+                        callbacks.error(data);
+                    }
+                }, function(err){
+                    callbacks.error(err);
+                }, "OurCodeWorldSFTP", "dir_delete", [datos]);
+            },
+            createFolder: function(remotePathToCreate,callbacks){
+                var datos = _settings;
+                
+                datos.remotepath = remotePathToCreate;
+                
+                cordova.exec(function(data){
+                    try{
+                        callbacks.success(JSON.parse(data));
+                    }catch(e){
+                        callbacks.error(data);
+                    }
+                }, function(err){
+                    callbacks.error(err);
+                }, "OurCodeWorldSFTP", "dir_create", [datos]);
             },
             /**
              * If you need to add a private key to the connection use the addIdentity method

@@ -12,6 +12,8 @@ public class OurCodeWorldSFTP extends CordovaPlugin {
     private static final String ACTION_DOWNLOAD = "download";
     private static final String ACTION_UPLOAD = "upload";
     private static final String ACTION_DELETE = "delete";
+    private static final String ACTION_DIR_CREATE = "dir_create";
+    private static final String ACTION_DIR_DELETE = "dir_delete";
 
     @Override
     public boolean execute(String action, JSONArray data, CallbackContext callbackContext) throws JSONException {
@@ -264,6 +266,118 @@ public class OurCodeWorldSFTP extends CordovaPlugin {
                             deleted.put("deleted", true);
                             
                             callbacks.success(deleted.toString());
+                        }
+ 
+                        channel.disconnect();
+                        session.disconnect();
+                    } catch (JSchException e) {
+                        callbacks.error(e.getMessage().toString());
+                        e.printStackTrace();  
+                    } catch (SftpException e) {
+                        callbacks.error(e.getMessage().toString());
+                        e.printStackTrace();
+                    } catch (JSONException e) {
+                        callbacks.error(e.getMessage().toString());
+                        e.printStackTrace();
+                    }
+                }
+            });
+
+            return true;
+        }else if(ACTION_DIR_DELETE.equals(action)){
+            cordova.getThreadPool().execute(new Runnable() {
+                public void run() {
+                    try {
+                        JSch ssh = new JSch();
+                        Session session = ssh.getSession(login, hostname, Integer.parseInt(port));
+                        
+                        if(!known_hosts.equals("DO_NOT_USE")){
+                            ssh.setKnownHosts(known_hosts);
+                        }else{
+                            java.util.Properties config = new java.util.Properties();
+                            config.put("StrictHostKeyChecking", "no");
+                            session.setConfig(config);
+                        }
+
+                        if (!arg_object.isNull("identity")){
+                            ssh.addIdentity(arg_object.getString("identity"));
+                        }else{
+                            session.setPassword(password);
+                        }
+
+                        session.connect();
+                        Channel channel = session.openChannel("sftp");
+                        channel.connect();
+
+                        ChannelSftp sftp = (ChannelSftp) channel;
+
+                        sftp.cd(directory);
+
+                        sftp.rmdir(arg_object.getString("remotepath"));
+
+                        Boolean success = true;
+
+                        if (success){
+                            JSONObject deleted = new JSONObject();
+                            deleted.put("deleted", true);
+                            
+                            callbacks.success(deleted.toString());
+                        }
+ 
+                        channel.disconnect();
+                        session.disconnect();
+                    } catch (JSchException e) {
+                        callbacks.error(e.getMessage().toString());
+                        e.printStackTrace();  
+                    } catch (SftpException e) {
+                        callbacks.error(e.getMessage().toString());
+                        e.printStackTrace();
+                    } catch (JSONException e) {
+                        callbacks.error(e.getMessage().toString());
+                        e.printStackTrace();
+                    }
+                }
+            });
+
+            return true;
+        }else if(ACTION_DIR_CREATE.equals(action)){
+             cordova.getThreadPool().execute(new Runnable() {
+                public void run() {
+                    try {
+                        JSch ssh = new JSch();
+                        Session session = ssh.getSession(login, hostname, Integer.parseInt(port));
+                        
+                        if(!known_hosts.equals("DO_NOT_USE")){
+                            ssh.setKnownHosts(known_hosts);
+                        }else{
+                            java.util.Properties config = new java.util.Properties();
+                            config.put("StrictHostKeyChecking", "no");
+                            session.setConfig(config);
+                        }
+
+                        if (!arg_object.isNull("identity")){
+                            ssh.addIdentity(arg_object.getString("identity"));
+                        }else{
+                            session.setPassword(password);
+                        }
+
+                        session.connect();
+                        Channel channel = session.openChannel("sftp");
+                        channel.connect();
+
+                        ChannelSftp sftp = (ChannelSftp) channel;
+
+                        sftp.cd(directory);
+
+                        sftp.mkdir(arg_object.getString("remotepath"));
+
+                        Boolean success = true;
+
+                        if (success){
+                            JSONObject created = new JSONObject();
+                            created.put("created", true);
+                            
+                            callbacks.success(created.toString());
                         }
  
                         channel.disconnect();
