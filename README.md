@@ -2,9 +2,9 @@
 
 This plugin can be used in production.
 
-#[Visit the homepage](https://sdkcarlos.github.io/sites/cordova/sftp-plugin.html)
+# [Visit the homepage](https://sdkcarlos.github.io/sites/cordova/sftp-plugin.html)
 
-#[Read the documentation](http://docs.ourcodeworld.com/projects/cordova-our-code-world-sftp-plugin)
+# [Read the documentation](http://docs.ourcodeworld.com/projects/cordova-our-code-world-sftp-plugin)
 
 # Installation
 
